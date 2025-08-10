@@ -30,7 +30,7 @@ async function provideHover(document: TextDocument, position: Position) {
     const line = document.lineAt(position.line)
     const match = line.text.match(regExp)
     const libs = getLibs()
-    const libName = match && match[1] && libs.find(lib => lib === match[1])
+    const libName = match && match[1] && libs && libs.find(lib => lib === match[1])
     if (libName) {
       logger.info(`Detect Lib: ${libName}`)
       const npmHome = `NPM: https://www.npmjs.com/package/${libName}`
