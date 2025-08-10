@@ -1,0 +1,78 @@
+{
+  "publisher": "micaiguai",
+  "name": "open-npm",
+  "displayName": "open-npm",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.4.1",
+  "description": "",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/micaiguai/open-npm#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micaiguai/open-npm"
+  },
+  "bugs": {
+    "url": "https://github.com/micaiguai/open-npm/issues"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "LICENSE.md",
+    "dist/*",
+    "res/*"
+  ],
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [],
+    "configuration": {
+      "type": "object",
+      "title": "open-npm",
+      "properties": {}
+    }
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --external vscode",
+    "dev": "nr build --watch --sourcemap",
+    "prepare": "nr update",
+    "update": "vscode-ext-gen --output src/generated/meta.ts",
+    "lint": "eslint .",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies",
+    "pack": "vsce package --no-dependencies",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && nr publish"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.2.1",
+    "@antfu/ni": "^23.3.1",
+    "@types/node": "^22.13.4",
+    "@types/vscode": "^1.97.0",
+    "@vscode/vsce": "^3.2.2",
+    "bumpp": "^10.0.3",
+    "eslint": "^9.20.1",
+    "esno": "^4.8.0",
+    "pnpm": "^10.4.1",
+    "reactive-vscode": "^0.2.10",
+    "tsdown": "^0.9.6",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vitest": "^3.0.5",
+    "vscode-ext-gen": "^1.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
