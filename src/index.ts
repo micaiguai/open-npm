@@ -8,7 +8,7 @@ import {
   languages,
 } from 'vscode'
 import { name } from './generated/meta'
-import { getLibs, logger } from './utils'
+import { getLibName, getLibs, logger } from './utils'
 
 export function activate(context: ExtensionContext) {
   try {
@@ -30,7 +30,11 @@ async function provideHover(document: TextDocument, position: Position) {
     const line = document.lineAt(position.line)
     const match = line.text.match(regExp)
     const libs = getLibs()
-    const libName = match && match[1] && libs && libs.find(lib => lib === match[1])
+    let libName = match && match[1]
+    if (!libName || !libs) {
+      return
+    }
+    libName = getLibName(libName, libs)
     if (libName) {
       logger.info(`Detect Lib: ${libName}`)
       const npmHome = `NPM: https://www.npmjs.com/package/${libName}`

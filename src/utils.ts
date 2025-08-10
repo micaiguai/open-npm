@@ -49,3 +49,16 @@ function getPackageJsonLibs(packageJson: PackageJson): string[] {
   }, [] as string[])
   return libs
 }
+
+export function getLibName(libName: string, libs: string[]) {
+  const chips = libName.split('/')
+  let fixedLibName = ''
+  if (libName.startsWith('@')) {
+    fixedLibName = `${chips[0]}/${chips[1]}`
+  }
+  else {
+    fixedLibName = chips[0]
+  }
+  const isValid = libs.includes(fixedLibName)
+  return isValid ? fixedLibName : ''
+}
