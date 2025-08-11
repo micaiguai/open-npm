@@ -50,7 +50,13 @@ function getPackageJsonLibs(packageJson: PackageJson): string[] {
   return libs
 }
 
-export function getLibName(libName: string, libs: string[]) {
+export function getLibName(libName: string) {
+  if (!isValidLibName(libName)) {
+    return ''
+  }
+  if (libName.startsWith('@types/')) {
+    libName = libName.replace('@types/', '')
+  }
   const chips = libName.split('/')
   let fixedLibName = ''
   if (libName.startsWith('@')) {
@@ -59,6 +65,13 @@ export function getLibName(libName: string, libs: string[]) {
   else {
     fixedLibName = chips[0]
   }
-  const isValid = libs.includes(fixedLibName)
-  return isValid ? fixedLibName : ''
+  return fixedLibName
+}
+
+function isValidLibName(libName: string) {
+  let isValid = false
+  if (/^@?[a-z0-9-_]/.test(libName)) {
+    isValid = true
+  }
+  return isValid
 }
