@@ -2,7 +2,7 @@
   "publisher": "micaiguai",
   "name": "micaiguai-open-npm",
   "displayName": "Vscode open npm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "packageManager": "pnpm@10.4.1",
   "description": "",
