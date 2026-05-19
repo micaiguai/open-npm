@@ -37,8 +37,9 @@ async function provideHover(document: TextDocument, position: Position) {
     libName = getLibName(libName)
     if (libName) {
       logger.info(`detect lib: ${libName}`)
-      const npmHome = `NPM: https://www.npmjs.com/package/${libName}`
-      return new Hover(npmHome)
+      const npmxUrl = `NPMX: https://npmx.dev/package/${libName}`
+      const npmUrl = `NPM: https://www.npmjs.com/package/${libName}`
+      return new Hover([npmxUrl, npmUrl])
     }
   }
   catch (error) {
